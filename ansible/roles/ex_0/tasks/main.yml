@@ -1,0 +1,25 @@
+---
+
+- name: Checkout repository
+  git:
+    repo: "{{ repo }}"
+    dest: "{{ build_dir }}"
+  tags:
+    - pull
+
+- name: Build image
+  docker_image: path="{{ build_dir }}" name="{{ app_name }}" state=build
+  tags:
+    - build
+
+- name: Run app
+  docker:
+    name: "{{ app_name }}"
+    image: "{{ app_name }}"
+    net: default
+    links:
+    - redis:redis
+    ports: 5000:5000
+    state: reloaded
+  tags:
+    - run

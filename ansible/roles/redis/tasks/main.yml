@@ -1,0 +1,22 @@
+---
+
+- name: Ensure reidisdata is present
+  file:
+    path: "{{ redisdata }}"
+    state: directory
+    owner: 999
+  tags:
+    - redis
+
+- name: Redis container is running
+  docker:
+    name: redis
+    image: redis
+    command: redis-server --appendonly yes
+    state: started
+    ports:
+    - 6379:6379
+    volumes:
+    - "{{ redisdata }}:/data"
+  tags:
+    - redis

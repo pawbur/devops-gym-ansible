@@ -1,0 +1,5 @@
+---
+
+repo: https://github.com/pawbur/devops-gym.git
+app_name: ex_0
+build_dir: "/tmp/{{ app_name }}"

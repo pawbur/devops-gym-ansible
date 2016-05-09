@@ -1,0 +1,10 @@
+---
+
+- hosts: "{{ target }}"
+  gather_facts: yes
+  become: yes
+  roles:
+    - { role: docker, tags: [ 'docker' ] }
+    - { role: redis, tags: [ 'redis' ] }
+    - ex_0
+
