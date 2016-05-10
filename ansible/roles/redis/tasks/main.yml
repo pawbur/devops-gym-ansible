@@ -12,7 +12,7 @@
   docker:
     name: redis
     image: redis
-    command: redis-server --appendonly yes
+    command: redis-server --protected-mode no --appendonly yes
     state: started
     ports:
     - 6379:6379

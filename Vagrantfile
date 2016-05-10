@@ -28,7 +28,7 @@ Vagrant.configure(2) do |config|
 #    end
 # workaround:
     build.vm.provision "shell", privileged: true,
-      inline: 'ansible-playbook --help || (apt-add-repository ppa:ansible/ansible && apt-get update && apt-get -y install ansible)'
+      inline: 'ansible-playbook --help || (apt-add-repository ppa:ansible/ansible && apt-get update -qq && apt-get -y -qq install ansible)'
     build.vm.provision "shell", privileged: true,
       inline: 'ansible-playbook -i "127.0.0.1," --connection=local --extra-vars "target=127.0.0.1" --tags docker,redis,pull,build,run /vagrant/ansible/provision.yml'
   end
